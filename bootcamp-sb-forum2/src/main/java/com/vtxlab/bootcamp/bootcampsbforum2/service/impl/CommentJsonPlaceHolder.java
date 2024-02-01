@@ -12,24 +12,24 @@ import com.vtxlab.bootcamp.bootcampsbforum2.model.dto.jdh.Comment;
 import com.vtxlab.bootcamp.bootcampsbforum2.service.CommentService;
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentJsonPlaceHolder implements CommentService {
 
-  @Value(value = "${api.jdh.domain}")
+  @Value(value = "${api.jph.domain}")
   private String domain;
 
-  @Value(value = "${api.jdh.endpoints.comment}")
-  private String endpoint;
+  @Value(value = "${api.jph.endpoints.comment}")
+  private String commentEndpoint;
 
   @Override
   public List<Comment> getComments() {
 
+    System.out.println("ServiceImpl");
+
     String urlString = UriComponentsBuilder.newInstance() //
-        .scheme(Scheme.lowerCase(Scheme.HTTPS)) //
+        .scheme(Scheme.HTTP.lowerCase()) //
         .host(domain) //
-        .path(endpoint) //
+        .path(commentEndpoint) //
         .toUriString();
-    
-    System.out.println(urlString);
 
     RestTemplate restTemplate = new RestTemplate();
 

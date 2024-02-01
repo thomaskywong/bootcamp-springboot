@@ -6,8 +6,8 @@ public enum Scheme {
   HTTPS,
   ;
 
-  public static String lowerCase(Scheme scheme) {
-    return scheme.name().toLowerCase();
+  public String lowerCase() {
+    return this.name().toLowerCase();
   }
   
 }

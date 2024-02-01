@@ -7,4 +7,5 @@ api:
     endpoints:
       user: "/users"
       post: "/posts"
+      comment: "/comments"
 
