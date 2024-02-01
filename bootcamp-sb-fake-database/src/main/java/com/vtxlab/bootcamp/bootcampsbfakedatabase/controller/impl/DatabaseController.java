@@ -67,10 +67,10 @@ public class DatabaseController implements DatabaseOperation {
     return catDatabaseService.getCats();
   }
 
-    // getCat2
-    @Override
-    public Cat getCat2(int index) {
-      return catDatabaseService.getCatFromStaticMemory(index);
-    }
+  // getCat2
+  @Override
+  public Cat getCat2(int index) {
+    return catDatabaseService.getCatFromStaticMemory(index);
+  }
 
 }

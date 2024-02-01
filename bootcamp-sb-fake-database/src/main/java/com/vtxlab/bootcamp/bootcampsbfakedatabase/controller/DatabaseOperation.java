@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.vtxlab.bootcamp.bootcampsbfakedatabase.model.Cat;
 
 public interface DatabaseOperation {
@@ -44,6 +45,7 @@ public interface DatabaseOperation {
 
   // @PatchMapping(value = "/cat/{idx}/name/{name}")
   // use to replace some attribute of an object in database
+  // Since only change specific field, so should NOT use @ResponseBody
   @PatchMapping(value = "/cat/{idx}/name/{name}")
   Cat patchCat(@PathVariable int idx, @PathVariable String name);
 
@@ -56,6 +58,6 @@ public interface DatabaseOperation {
 
   // getCat2 using @RequestParam
   @GetMapping(value = "/cat")
-  Cat getCat2(@RequestParam(name = "idx") int index);
+  Cat getCat2(@RequestParam int index);
 
 }

@@ -7,13 +7,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class BootcampSbFakeDatabaseApplication {
-	static ConfigurableApplicationContext cac;
+	// static ConfigurableApplicationContext cac;
 	
 	public static void main(String[] args) {
 
 		SpringApplication.run(BootcampSbFakeDatabaseApplication.class, args);
 
-
 	}
-
 }

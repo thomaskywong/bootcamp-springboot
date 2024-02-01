@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+api:
+  jph:
+    domain: "jsonplaceholder.typicode.com"
+    endpoints:
+      user: "/users"
+      post: "/posts"
+
