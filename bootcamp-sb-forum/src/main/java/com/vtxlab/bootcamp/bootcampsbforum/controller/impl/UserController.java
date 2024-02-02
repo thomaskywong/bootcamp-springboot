@@ -25,20 +25,5 @@ public class UserController implements UserOperation{
     return userService.getUsers();
 
   }
-
-  // @Override
-  // public String hello(){
-  //   return "Hello";
-  // }
-
-  // @Override
-  // public List<Post> getPosts() {
-  //   return userService.getPosts();
-  // }
-
-  // @Override
-  // public List<Comment> getComments() {
-  //   return userService.getComments();
-  // }
   
 }

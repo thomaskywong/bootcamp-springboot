@@ -5,10 +5,6 @@ import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 
 public interface UserService {
 
-  List<User> getUsers();
-  
-  // List<Post> getPosts();
-
-  // List<Comment> getComments();
+  List<User> getUsers(); 
   
 }

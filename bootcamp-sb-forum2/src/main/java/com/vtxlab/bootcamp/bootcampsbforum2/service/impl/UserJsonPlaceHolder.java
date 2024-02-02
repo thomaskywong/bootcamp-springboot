@@ -1,4 +1,4 @@
-package com.vtxlab.bootcamp.bootcampsbforum.service.impl;
+package com.vtxlab.bootcamp.bootcampsbforum2.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
-import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
-import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
+import com.vtxlab.bootcamp.bootcampsbforum2.infra.Scheme;
+import com.vtxlab.bootcamp.bootcampsbforum2.model.dto.jdh.User;
+import com.vtxlab.bootcamp.bootcampsbforum2.service.UserService;
 
 @Service
 public class UserJsonPlaceHolder implements UserService {
@@ -61,7 +61,7 @@ public class UserJsonPlaceHolder implements UserService {
 
     // 
     return UriComponentsBuilder.newInstance() //
-        .scheme(scheme.lowercaseName()) // .scheme("https") from enum
+        .scheme(scheme.lowerCase()) // .scheme("https") from enum
         .host(domain) //
         .path(endpoint) //
         .toUriString(); // handle special character such as : / \ }
