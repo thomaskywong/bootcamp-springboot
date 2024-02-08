@@ -60,4 +60,10 @@ public interface DatabaseOperation {
   @GetMapping(value = "/cat")
   Cat getCat2(@RequestParam int index);
 
+  @GetMapping(value = "/tutor")
+  CharSequence tutor();
+
+  @GetMapping(value = "/age")
+  Integer age();
+
 }

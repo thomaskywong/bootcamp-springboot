@@ -1,24 +1,29 @@
 package com.vtxlab.bootcamp.bootcampsbfakedatabase;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vtxlab.bootcamp.bootcampsbfakedatabase.config.AppConfig;
 import com.vtxlab.bootcamp.bootcampsbfakedatabase.controller.impl.DatabaseController;
 import com.vtxlab.bootcamp.bootcampsbfakedatabase.model.Cat;
 import com.vtxlab.bootcamp.bootcampsbfakedatabase.service.CatDatabaseService;
@@ -37,8 +42,14 @@ class DatabaseControllerTests {
 
         @Autowired
         private MockMvc mockMvc; // similar to postman by brought by @WebMvcTest
+
         @Autowired
         private WebApplicationContext webApplicationContext;
+
+        @Autowired
+        @Qualifier(value = "config1")
+        private AppConfig appConfig;
+
         // @Autowired // cannot autowired @Service in @WebMvnTest
         @MockBean // Mock there is @Service bean. Similar to @Mock
         private CatDatabaseService catDatabaseService;
@@ -219,14 +230,16 @@ class DatabaseControllerTests {
                                 .thenReturn(mockedReturnCat);
 
                 // Get - @RequestParam(name = "idx") - URL"/cat/?idx=0"
-                mockMvc.perform(get("/api/v1/cat")
-                                        .param("index", "1"))
+                mockMvc.perform(get("/api/v1/cat").param("index", "1"))
                                 .andExpect(status().isOk())// show server status: 200 = OK, 404 = Error: path not found, 500 = IP not found or Port not found
-                                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                                .andExpect(content().contentType(
+                                                MediaType.APPLICATION_JSON))
                                 .andExpect(jsonPath("$.name").value("ABC"))
                                 .andExpect(jsonPath("$.age").value("3"))
                                 .andDo(print());
 
 
         }
+
+    
 }

@@ -9,13 +9,18 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
   
   @Bean(value = "config1")
-  String tutorName() {
+  String tutorName() {  
     return "Vincent";
   }
 
   @Bean(value = "config2")
   String tutorName2() {
     return "Oscar";
+  }
+
+  @Bean(value = "bean3")
+  Integer age() {
+    return 44;
   }
   
 }

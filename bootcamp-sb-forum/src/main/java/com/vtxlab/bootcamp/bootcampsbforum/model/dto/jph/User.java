@@ -1,5 +1,6 @@
 package com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,14 +16,14 @@ import lombok.ToString;
 @Builder
 public class User {
 
-  private int id;
+  private int id; // primary
   private String name;
   private String username;
   private String email;
-  private Address address;
+  private Address address; // One-to-One mapping
   private String phone;
   private String website;
-  private Company company;
+  private Company company;  // One-to-one mapping
 
   @Getter
   // @Setter
@@ -32,14 +33,18 @@ public class User {
     private String suite;
     private String city;
     private String zipcode;
-    private Location geo;
+    private Location geo; // One-to-One Mapping
 
     @Getter
     // @Setter
     public static class Location {
       
-      private String lat;
-      private String lng;
+      // change attribute name from web to local name
+      @JsonProperty(value = "lat")
+      private String latitude;
+      
+      @JsonProperty(value = "lng")
+      private String longtitude;
   
     }
 
@@ -51,7 +56,9 @@ public class User {
 
     private String name;
     private String catchPhrase;
-    private String bs;
+
+    @JsonProperty(value = "bs")
+    private String businessDescription;
 
   }
 

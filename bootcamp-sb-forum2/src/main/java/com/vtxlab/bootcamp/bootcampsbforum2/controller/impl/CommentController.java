@@ -80,30 +80,6 @@ public class CommentController implements CommentOperation {
     return ResponseEntity.ok(apiResp);
 
 
-    // Get List<comment> related to userId, wrap into Optional
-
-
-    // Optional<UserCommentDTO> userCommentDTO = userService.getUsers() //
-    //     .stream() //
-    //     .filter(e -> e.getId() == userId) //
-    //     .map(e -> {
-    //       List<Comment> comments = commentService.getComments();
-    //       return GovMapper.map(e, comments);
-    //     }) //
-    //     .findFirst();
-    
-    // // Check if Optional isPresent, if true then wrap UserCommentDTO to ApiResp
-    // if (userCommentDTO.isPresent()) {
-    //   ApiResp<UserCommentDTO> apiResp = ApiResp.<UserCommentDTO>builder() //
-    //                                            .code(Syscode.OK.getCode()) //
-    //                                            .message(Syscode.OK.getMessage()) //
-    //                                            .data(userCommentDTO.get()) //
-    //                                            .build();
-    //   return ResponseEntity.ok(apiResp);
-    // }
-
-    // throw new ResourceNotFound(Syscode.NOTFOUND);
-
   }
 
 

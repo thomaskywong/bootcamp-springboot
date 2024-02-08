@@ -10,10 +10,15 @@ public class BootcampSbForumApplication {
 	
 	public static void main(String[] args) {
 
-		
-		
-		SpringApplication.run(BootcampSbForumApplication.class, args);
+		ConfigurableApplicationContext cac
+			= SpringApplication.run(BootcampSbForumApplication.class, args);
 
+		String[] beans = cac.getBeanDefinitionNames();
+
+		for (String bean: beans) {
+			System.out.println("Bean=" + bean);
+		}	
+		
 
 	}
 
