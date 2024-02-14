@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.bootcampsbforum.controller.CommentOperation;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.CommentDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserCommentDTO;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.ResourceNotFound;
+import com.vtxlab.bootcamp.bootcampsbforum.exception.ResourceNotFound;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.CommentService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;

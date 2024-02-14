@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.JPHClientException;
+import com.vtxlab.bootcamp.bootcampsbforum.exception.JPHClientException;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;

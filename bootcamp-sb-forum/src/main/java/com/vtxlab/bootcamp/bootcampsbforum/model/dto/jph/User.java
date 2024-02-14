@@ -16,7 +16,7 @@ import lombok.ToString;
 @Builder
 public class User {
 
-  private int id; // primary
+  private int id; // primary key
   private String name;
   private String username;
   private String email;
@@ -58,7 +58,7 @@ public class User {
     private String catchPhrase;
 
     @JsonProperty(value = "bs")
-    private String businessDescription;
+    private String businessService;
 
   }
 

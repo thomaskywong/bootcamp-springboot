@@ -5,17 +5,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.JPHClientException;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.ResourceNotFound;
+import com.vtxlab.bootcamp.bootcampsbforum.exception.ResourceNotFound;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
+import com.vtxlab.bootcamp.bootcampsbforum.repository.UserRepository;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserJsonPlaceHolder implements UserService {
@@ -28,8 +32,36 @@ public class UserJsonPlaceHolder implements UserService {
   @Value(value = "${api.jph.endpoints.user}")
   private String userEndpoint;
 
-  // @Autowired
-  // private RestTemplate restTemplate;
+  @Autowired
+  private RestTemplate restTemplate;
+
+  @Autowired
+  private UserRepository userRepository;
+
+  // for putting object into Database
+  // Similar to Autowired. EntityManager from context container
+  @PersistenceContext
+  private EntityManager entityManager;
+
+  @Override
+  public User getUser(Long id) {
+    String userUrl = url(Scheme.HTTP, domain, userEndpoint);
+    User[] users = restTemplate.getForObject(userUrl, User[].class);
+    
+    Optional<User> userOp =  Arrays.stream(users).filter(e -> e.getId() == id).findFirst();
+  
+    if (userOp.isEmpty())
+      throw new ResourceNotFound(Syscode.NOTFOUND);
+    
+    return userOp.get();
+    
+
+  }
+
+  @Override
+  public Long countUserByName(String prefix) {
+    return userRepository.countUserByNameStartsWith(prefix);
+  }
 
   @Override
   public List<User> getUsers() {
@@ -37,7 +69,7 @@ public class UserJsonPlaceHolder implements UserService {
     // Consume RESTful web service in Spring boot
     // get information from other web servers.
     // Use @Bean in @Configuration. No new RestTemplated is needed locally
-    RestTemplate restTemplate = new RestTemplate();
+    // RestTemplate restTemplate = new RestTemplate();
 
     // System.out.println("domain="+ domain);
     // System.out.println("userEndpoint="+ userEndpoint);
@@ -62,34 +94,6 @@ public class UserJsonPlaceHolder implements UserService {
 
   }
 
-  // Check if user exists. Throw ResourceNotFound Exception to Global Exception Handler to output an ApiResponse
-  @Override
-  public User getUser(int userId) {
-    RestTemplate restTemplate = new RestTemplate();
-    String userUrl = url(Scheme.HTTP, domain, userEndpoint);
-
-    try {
-      User[] users = restTemplate.getForObject(userUrl, User[].class); //
-
-      Optional<User> userOptional = Arrays.stream(users) //
-          .filter(e -> e.getId() == userId) //
-          .findFirst();
-
-      // if (userOptional.isEmpty())
-      // throw new ResourceNotFound(Syscode.NOTFOUND);
-
-      // return userOptional.get();
-      if (userOptional.isPresent())
-        return userOptional.get();
-
-      throw new ResourceNotFound(Syscode.NOTFOUND);
-
-    } catch (RestClientException ex) {
-      throw new JPHClientException(Syscode.JPH_NOT_AVAILABLE);
-    }
-
-  }
-
   // Public tools that converts scheme, domain name and endpoint path into a single string then return
   private static String url(Scheme scheme, String domain, String endpoint) {
 
@@ -103,6 +107,82 @@ public class UserJsonPlaceHolder implements UserService {
         .path(endpoint) //
         .toUriString(); // handle special character such as : / \ }
 
+  }
+
+  @Override
+  public com.vtxlab.bootcamp.bootcampsbforum.entity.User findById(Long id) {
+    
+    Optional<com.vtxlab.bootcamp.bootcampsbforum.entity.User> userOp = userRepository.findById(id);
+
+    if (userOp.isEmpty())
+      throw new ResourceNotFound(Syscode.NOTFOUND);
+    
+    return userOp.get();
+  }
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAll() {
+    return userRepository.findAll();
+  }
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByAddr(
+      Double Latitude) {
+    return userRepository.findAllByAddrLatGreaterThan(Latitude);
+  }
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailAndPhoneDesc(
+      String email, String phone) {
+    return userRepository.findAllByEmailAndPhoneOrderByEmailDesc(email, phone);
+  }
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailOrPhoneDesc(
+      String email, String phone) {
+    Sort sort = Sort.by("email").and(Sort.by(Sort.Direction.DESC, "phone"));
+    return userRepository.findAllByEmailOrPhone(email, phone, sort);
+  }
+
+  // Update (PATCH) PostgreSQL using @Transactional
+  // Proceeds all statement first, then commit change to database
+  @Override
+  @Transactional // All success or Nothing. Since database may be accessed by other enquiry
+  public void updateUserEmail(Long id, String email) {
+
+    userRepository.updateUserEmail(id, email);
+    // return userRepository.findById(id).get();
+  }
+
+  @Override
+  @Transactional // All success or Nothing. Since database may be accessed by other enquiry
+  public com.vtxlab.bootcamp.bootcampsbforum.entity.User updateUserById(Long id,
+      com.vtxlab.bootcamp.bootcampsbforum.entity.User newUser) {
+
+    // entityManager.find() -> SELECT
+    com.vtxlab.bootcamp.bootcampsbforum.entity.User oldUser = entityManager //
+        .find(com.vtxlab.bootcamp.bootcampsbforum.entity.User.class, id);
+
+    // oldUser.setId(newUser.getId());
+    oldUser.setName(newUser.getName());
+    oldUser.setUsername(newUser.getUsername());
+    oldUser.setEmail(newUser.getEmail());
+    oldUser.setPhone(newUser.getPhone());
+    oldUser.setWebsite(newUser.getWebsite());
+    oldUser.setStreet(newUser.getStreet());
+    oldUser.setSuite(newUser.getSuite());
+    oldUser.setCity(newUser.getCity());
+    oldUser.setZipcode(newUser.getZipcode());
+    oldUser.setAddrLat(newUser.getAddrLat());
+    oldUser.setAddrLong(newUser.getAddrLong());
+    oldUser.setCName(newUser.getCName());
+    oldUser.setCCatchPhrase(newUser.getCCatchPhrase());
+    oldUser.setCBusService(newUser.getCBusService());
+
+    // entityManager.merge() -> UPDATE
+    entityManager.merge(oldUser);
+
+    return oldUser;
   }
 
 

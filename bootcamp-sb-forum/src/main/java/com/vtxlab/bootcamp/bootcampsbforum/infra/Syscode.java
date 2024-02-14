@@ -6,9 +6,10 @@ import lombok.Getter;
 public enum Syscode {
 
   OK("000000", "OK."), //
-  NOTFOUND("100000","Not Found."), //
+  INVALID_CURRENCY("100000","Invalid Input Currency."), //
   JPH_NOT_AVAILABLE("100001","JsonPlaceHolder API not available."), //
-  REST_CLIENT_EXEPTION("9000001", "RestClient Exception."), //
+  NOTFOUND("100002","Resources Not Found."), //
+  REST_CLIENT_EXEPTION("900001", "RestClient Exception."), //
   NPE_EXCEPTION("900000","Runtime Exception - NPE"), //
   GENERAL_EXCEPTION("999999","Exception"), //
   ;

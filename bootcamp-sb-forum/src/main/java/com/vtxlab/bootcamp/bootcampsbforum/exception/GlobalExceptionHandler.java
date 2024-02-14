@@ -3,8 +3,6 @@ package com.vtxlab.bootcamp.bootcampsbforum.exception;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.RestClientException;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.ApiResponse;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.JPHClientException;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.ResourceNotFound;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,22 +24,23 @@ public class GlobalExceptionHandler {
         .build();
   }
 
-    @ExceptionHandler(RestClientException.class)
-    @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
-    public ApiResponse<Void> jphClientExceptionHandler(RestClientException ex) {
-      return ApiResponse.<Void>builder() //
-          .code(Syscode.REST_CLIENT_EXEPTION.getCode()) //
-          .message(Syscode.REST_CLIENT_EXEPTION.getMessage()) //
-          .data(null) //
-          .build();
-    }
+  @ExceptionHandler(RestClientException.class)
+  @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
+  public ApiResponse<Void> jphClientExceptionHandler(RestClientException ex) {
+    return ApiResponse.<Void>builder() //
+        .code(Syscode.REST_CLIENT_EXEPTION.getCode()) //
+        .message(Syscode.REST_CLIENT_EXEPTION.getMessage()) //
+        .data(null) //
+        .build();
+  }
 
   @ExceptionHandler(ResourceNotFound.class)
   @ResponseStatus(value = HttpStatus.OK)
-  public ApiResponse<Void> ResourceNotFoundExceptionHandler(ResourceNotFound ex) {
+  public ApiResponse<Void> ResourceNotFoundExceptionHandler(
+      ResourceNotFound ex) {
     return ApiResponse.<Void>builder() //
-        .code(Syscode.NOTFOUND.getCode()) //
-        .message(Syscode.NOTFOUND.getMessage()) //
+        .code(Syscode.JPH_NOT_AVAILABLE.getCode()) //
+        .message(Syscode.JPH_NOT_AVAILABLE.getMessage()) //
         .data(null) //
         .build();
   }
@@ -57,15 +56,15 @@ public class GlobalExceptionHandler {
         .build();
   }
 
-  // NPE - NullPointerException. Catch null pointer
+  // Last exception handler: handle all possible Exception
   @ExceptionHandler(Exception.class)
   @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
   public ApiResponse<Void> ExceptionHandler(Exception ex) {
-    return ApiResponse.<Void>builder() //
-        .code(Syscode.GENERAL_EXCEPTION.getCode()) //
-        .message(Syscode.GENERAL_EXCEPTION.getMessage()) //
-        .data(null) //
-        .build();
+  return ApiResponse.<Void>builder() //
+  .code(Syscode.GENERAL_EXCEPTION.getCode()) //
+  .message(Syscode.GENERAL_EXCEPTION.getMessage()) //
+  .data(null) //
+  .build();
   }
 
 }

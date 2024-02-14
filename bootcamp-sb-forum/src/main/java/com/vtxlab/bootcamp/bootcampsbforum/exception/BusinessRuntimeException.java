@@ -1,5 +1,6 @@
-package com.vtxlab.bootcamp.bootcampsbforum.infra;
+package com.vtxlab.bootcamp.bootcampsbforum.exception;
 
+import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 import lombok.Getter;
 
 

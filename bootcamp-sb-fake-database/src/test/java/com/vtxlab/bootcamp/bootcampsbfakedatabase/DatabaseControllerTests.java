@@ -41,14 +41,14 @@ import com.vtxlab.bootcamp.bootcampsbfakedatabase.service.CatDatabaseService;
 class DatabaseControllerTests {
 
         @Autowired
-        private MockMvc mockMvc; // similar to postman by brought by @WebMvcTest
+        private MockMvc mockMvc; // similar to postman brought by @WebMvcTest
 
         @Autowired
         private WebApplicationContext webApplicationContext;
 
         @Autowired
         @Qualifier(value = "config1")
-        private AppConfig appConfig;
+        private CharSequence tutor;
 
         // @Autowired // cannot autowired @Service in @WebMvnTest
         @MockBean // Mock there is @Service bean. Similar to @Mock

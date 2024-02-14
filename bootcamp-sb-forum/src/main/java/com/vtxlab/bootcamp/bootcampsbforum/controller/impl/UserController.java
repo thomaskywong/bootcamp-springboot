@@ -2,6 +2,7 @@ package com.vtxlab.bootcamp.bootcampsbforum.controller.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.bootcampsbforum.controller.UserOperation;
@@ -10,20 +11,63 @@ import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api/v1")
-public class UserController implements UserOperation{
-  
+public class UserController implements UserOperation {
+
   // Dependency injection (@Service)
   @Autowired
   private UserService userService;
 
+  @Override 
+  public User getUser(Long id) {
+    return userService.getUser(id);
+  }
 
   @Override
   public List<User> getUsers() {
-
     // System.out.println("start controller");
-
     return userService.getUsers();
-
   }
-  
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> getUsers2() {
+    // System.out.println("start controller");
+    return userService.findAll();
+  }
+
+  @Override
+  public com.vtxlab.bootcamp.bootcampsbforum.entity.User getUser2(Long id) {
+    // System.out.println("start controller");
+    return userService.findById(id);
+  }
+
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByAddr(
+      Double Latitude) {
+    return userService.findAllByAddr(Latitude);
+  }
+
+  @Override
+  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailOrPhone(
+      String email, String phone) {
+    return userService.findAllByEmailOrPhoneDesc(email, phone);
+  }
+
+  @Override
+  public Long countUserByName(String prefix) {
+    return userService.countUserByName(prefix.toLowerCase());
+  }
+
+  @Override
+  public void patchUserEmailById(long id, String email) {
+    userService.updateUserEmail(id, email);
+  }
+
+  @Override
+  public com.vtxlab.bootcamp.bootcampsbforum.entity.User putUserById(long id,
+      com.vtxlab.bootcamp.bootcampsbforum.entity.User newUser) {
+
+    return userService.updateUserById(id, newUser);
+  }
+
 }
