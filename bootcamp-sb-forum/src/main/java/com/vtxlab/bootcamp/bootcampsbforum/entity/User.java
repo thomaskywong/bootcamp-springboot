@@ -25,6 +25,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User implements Serializable {
 
+  // Serializable. Update UID everytime modify Entity
+  // Serializable for Database
+  // Restful API has Serializable implicitly
+  // indication of entity version identification
+  private static final long serialVersionUID = 2L;
+
   // @Id annotation indictates the attibute is primary key
   // @GeneratedValue set to (strategy = GenerationType.IDENTITY) means AUTO_INCREMENT in SQL)
   @Id

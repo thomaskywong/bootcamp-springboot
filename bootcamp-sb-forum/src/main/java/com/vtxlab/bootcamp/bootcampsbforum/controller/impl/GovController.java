@@ -41,7 +41,7 @@ public class GovController implements GovOperation {
   @Autowired 
   private ModelMapper modelMapper;
 
-  public ApiResponse<UserPostDTO> getUser(int userId) {
+  public ApiResponse<UserPostDTO> getUser(Long userId) {
 
     // 1. User service
     // 2. Post service

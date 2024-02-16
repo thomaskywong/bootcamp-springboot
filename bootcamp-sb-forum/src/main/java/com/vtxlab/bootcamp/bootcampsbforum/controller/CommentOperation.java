@@ -12,6 +12,6 @@ public interface CommentOperation {
   // 2. user found, but no comment
   @GetMapping(value = "/comments")
   @ResponseStatus(value = HttpStatus.OK)
-  UserCommentDTO getUserComments(@RequestParam int userId);
+  UserCommentDTO getUserComments(@RequestParam Long userId);
   
 }

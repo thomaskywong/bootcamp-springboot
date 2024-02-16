@@ -56,6 +56,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 // CRUD methods enforced by JpaRespository interface:
 //
 // public List<User> findAll();
+// public User findById(Long id);
 // public List<User> findAllById(Iterable<Long> ids) {
 // public <S extends User> List<S> saveAll(Iterable<S> entities) {
 // public long count() {

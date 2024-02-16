@@ -16,7 +16,7 @@ public interface GovOperation {
   // 2. user found, not no post
   @GetMapping(value = "/user")
   @ResponseStatus(value = HttpStatus.OK) // Use Global Exception Handler to catch exceptions
-  ApiResponse<UserPostDTO> getUser(@RequestParam(required = true) int userId);
+  ApiResponse<UserPostDTO> getUser(@RequestParam(required = true) Long userId);
 
   @GetMapping(value = "/users")
   @ResponseStatus(value = HttpStatus.OK)

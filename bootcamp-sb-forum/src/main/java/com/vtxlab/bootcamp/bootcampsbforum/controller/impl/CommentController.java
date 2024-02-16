@@ -25,7 +25,7 @@ public class CommentController implements CommentOperation {
 
   // Homework
   @Override
-  public UserCommentDTO getUserComments(int userId)
+  public UserCommentDTO getUserComments(Long userId)
       throws ResourceNotFound {
 
     // Step 1: Check if User id value. Store User for filtering list of comments
