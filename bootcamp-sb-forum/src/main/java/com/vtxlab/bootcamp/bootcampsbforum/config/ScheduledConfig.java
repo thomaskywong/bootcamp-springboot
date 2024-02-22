@@ -10,42 +10,35 @@ import org.springframework.stereotype.Component;
 public class ScheduledConfig {
 
 
-  // Run every 5s 
   // @Scheduled(fixedRate = 2000)
-  public void fixedRateTask() throws Exception {
-    System.out.println("Starts fixedRate." + System.currentTimeMillis());
+  public void fixedRateTask() throws InterruptedException {
+    System.out.println("start: fixedRateTask " + System.currentTimeMillis());;
     Thread.sleep(1000);
-    System.out.println("Ends fixedRate.");
-
+    System.out.println("end: fixedRateTask");
   }
 
-  // Run every 5s after completion of the last task
   // @Scheduled(fixedDelay = 2000)
-  public void fixedDelayTask() throws Exception {
-    System.out.println("Starts fixedDelay." + System.currentTimeMillis());
+  public void fixedDelayTask() throws InterruptedException {
+    System.out.println("start: fixedDelayTask " + System.currentTimeMillis());
     Thread.sleep(1000);
-    System.out.println("Ends fixedDelay.");
+    System.out.println("end: fixedDelayTask");
   }
 
-  // Cron Expression - fixed delay every 5 second
-  // @Scheduled(cron = "*/5 * * * * *")
-  // Cron
-  // @Async - not single thread
-  // @Scheduled(cron = "*/5 * * * * ?")
-  // @Async
-  public void cornExpression1() throws InterruptedException {
-    System.out.println("Starts cron1." + System.currentTimeMillis());
-    Thread.sleep(1000);
-    System.out.println("Ends cron1."  + System.currentTimeMillis());
+  // @Scheduled(cron = "*/5 * * * * ?") // every 5 sec, similar to fixedDelay
+  // @Scheduled(cron = "5 * * * * ?") // every 5 sec, similar to fixedDelay
+  @Async
+  public void cronTask5() throws InterruptedException {
+    System.out.println("start cronTask5");
+    Thread.sleep(10000);
+    System.out.println("end cronTask5");
   }
 
-  // @Async - not single thread
-  // @Scheduled(cron = "*/10 * * * * ?")
-  // @Async
-  public void cornExpression2() throws InterruptedException {
-    System.out.println("Starts cron2." + System.currentTimeMillis());
-    Thread.sleep(1000);
-    System.out.println("Ends cron2."  + System.currentTimeMillis());
+  // @Scheduled(cron = "10 * * * * ?") // every 5 sec, similar to fixedDelay
+  @Async
+  public void cronTask10() throws InterruptedException {
+    System.out.println("start cronTask10");
+    Thread.sleep(10000);
+    System.out.println("end cronTask10");
   }
 
 }

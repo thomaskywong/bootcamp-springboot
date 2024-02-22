@@ -8,6 +8,7 @@ api:
       user: "/users"
       post: "/posts"
       comment: "/comments"
+      apprunner: "/user"
 
 database: 
   postgres: "db_forum"

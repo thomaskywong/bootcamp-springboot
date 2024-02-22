@@ -14,9 +14,9 @@ public class ForumDatabaseHolder implements ForumDatabaseService {
   @Autowired
   private UserRepository userRepository;
 
-    @Override
+  @Override
   public List<User> saveUsers(List<User> users) {
-  
+
     return userRepository.saveAll(users);
   }
 
@@ -33,5 +33,5 @@ public class ForumDatabaseHolder implements ForumDatabaseService {
 
     userRepository.deleteAll();
   }
-  
+
 }

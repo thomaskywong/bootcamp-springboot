@@ -28,7 +28,6 @@ public interface GovOperation {
   // 404 -> request path issue orresource not found
   // 204 -> id not found.
 
-
   // NPE
   @GetMapping(value = "/test/npe")
   public String testNPE();
