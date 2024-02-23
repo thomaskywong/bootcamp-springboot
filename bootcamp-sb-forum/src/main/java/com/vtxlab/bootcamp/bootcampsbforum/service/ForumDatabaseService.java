@@ -1,15 +1,18 @@
 package com.vtxlab.bootcamp.bootcampsbforum.service;
 
 import java.util.List;
-import com.vtxlab.bootcamp.bootcampsbforum.entity.User;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
+
 
 // interface to Database
 public interface ForumDatabaseService {
 
-  List<User> saveUsers(List<User> users);
+  List<UserEntity> saveUsers(List<UserEntity> users);
 
-  User saveUser(User user);
+  UserEntity saveUser(UserEntity user);
 
   void deleteAllUsers();
+
+  
   
 }

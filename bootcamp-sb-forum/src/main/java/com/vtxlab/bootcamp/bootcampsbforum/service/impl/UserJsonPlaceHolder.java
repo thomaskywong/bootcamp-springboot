@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
 import com.vtxlab.bootcamp.bootcampsbforum.exception.ResourceNotFound;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
@@ -40,7 +41,7 @@ public class UserJsonPlaceHolder implements UserService {
 
   // for putting object into Database
   // Similar to Autowired. EntityManager from context container
-  @PersistenceContext
+  @PersistenceContext  // Persistence EntityManager
   private EntityManager entityManager;
 
   @Override
@@ -58,10 +59,6 @@ public class UserJsonPlaceHolder implements UserService {
 
   }
 
-  @Override
-  public Long countUserByName(String prefix) {
-    return userRepository.countUserByNameStartsWith(prefix);
-  }
 
   @Override
   public List<User> getUsers() {
@@ -109,59 +106,62 @@ public class UserJsonPlaceHolder implements UserService {
 
   }
 
-  @Override
-  public com.vtxlab.bootcamp.bootcampsbforum.entity.User findById(Long id) {
+  // @Override
+  // public UserEntity findById(Long id) {
     
-    Optional<com.vtxlab.bootcamp.bootcampsbforum.entity.User> userOp = userRepository.findById(id);
+  //   Optional<UserEntity> userOp = userRepository.findById(id);
 
-    if (userOp.isEmpty())
-      throw new ResourceNotFound(Syscode.NOTFOUND);
+  //   if (userOp.isEmpty())
+  //     throw new ResourceNotFound(Syscode.NOTFOUND);
     
-    return userOp.get();
-  }
+  //   return userOp.get();
+  // }
 
   @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAll() {
+  public List<UserEntity> findAll() {
     return userRepository.findAll();
   }
 
-  @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByAddr(
-      Double Latitude) {
-    return userRepository.findAllByAddrLatGreaterThan(Latitude);
-  }
+  // @Override
+  // public Long countUserByName(String prefix) {
+  //   return userRepository.countUserByNameStartsWith(prefix);
+  // }
 
-  @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailAndPhoneDesc(
-      String email, String phone) {
-    return userRepository.findAllByEmailAndPhoneOrderByEmailDesc(email, phone);
-  }
+  // @Override
+  // public List<UserEntity> findAllByAddr(
+  //     Double Latitude) {
+  //   return userRepository.findAllByAddrLatGreaterThan(Latitude);
+  // }
 
-  @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailOrPhoneDesc(
-      String email, String phone) {
-    Sort sort = Sort.by("email").and(Sort.by(Sort.Direction.DESC, "phone"));
-    return userRepository.findAllByEmailOrPhone(email, phone, sort);
-  }
+  // @Override
+  // public List<UserEntity> findAllByEmailAndPhoneDesc(
+  //     String email, String phone) {
+  //   return userRepository.findAllByEmailAndPhoneOrderByEmailDesc(email, phone);
+  // }
+
+  // @Override
+  // public List<UserEntity> findAllByEmailOrPhoneDesc(
+  //     String email, String phone) {
+  //   Sort sort = Sort.by("email").and(Sort.by(Sort.Direction.DESC, "phone"));
+  //   return userRepository.findAllByEmailOrPhone(email, phone, sort);
+  // }
 
   // Update (PATCH) PostgreSQL using @Transactional
   // Proceeds all statement first, then commit change to database
-  @Override
-  @Transactional // All success or Nothing. Since database may be accessed by other enquiry
-  public void updateUserEmail(Long id, String email) {
+  // @Override
+  // @Transactional // All success or Nothing. Since database may be accessed by other enquiry
+  // public void updateUserEmail(Long id, String email) {
 
-    userRepository.updateUserEmail(id, email);
-    // return userRepository.findById(id).get();
-  }
+  //   userRepository.updateUserEmail(id, email);
+  //   // return userRepository.findById(id).get();
+  // }
 
-  @Override
-  @Transactional // All success or Nothing. Since database may be accessed by other enquiry
-  public com.vtxlab.bootcamp.bootcampsbforum.entity.User updateUserById(Long id,
-      com.vtxlab.bootcamp.bootcampsbforum.entity.User newUser) {
+  // @Override
+  // @Transactional // All success or Nothing. Since database may be accessed by other enquiry
+  public UserEntity updateUserById(Long id,UserEntity newUser) {
 
     // entityManager.find() -> SELECT
-    com.vtxlab.bootcamp.bootcampsbforum.entity.User oldUser = entityManager //
-        .find(com.vtxlab.bootcamp.bootcampsbforum.entity.User.class, id);
+    UserEntity oldUser = entityManager.find(UserEntity.class, id);
 
     // oldUser.setId(newUser.getId());
     oldUser.setName(newUser.getName());

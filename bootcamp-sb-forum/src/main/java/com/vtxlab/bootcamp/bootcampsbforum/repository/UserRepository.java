@@ -7,12 +7,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import com.vtxlab.bootcamp.bootcampsbforum.entity.User;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
+import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 
 // Annotation for indicating self defined Repository
 // UserRepository is an interface that implements JpaRepository interface (for all SQL database languages)
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+@Repository  // Repository annotation
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
   // Hibernate (implementation class) -> Bean -> Spring Context
   // Objective: Implement JPA interface (Java Persistence Application Interface)
@@ -24,34 +25,35 @@ public interface UserRepository extends JpaRepository<User, Long> {
   // 1. Query "Method" - name of method shall be precise (ie. table name, findBy, ...)
   // Method Generation
   // select * from users where username = ?
-  User findByUsername(String username);
+  UserEntity findByUsername(String username);
 
-  // List<User> findAllByEmailAndPhone(String email, String phone, Sort sort);
-  List<User> findAllByEmailAndPhoneOrderByEmailDesc(String email, String phone);
+  // Sort sort is injected by springframework
+  // import org.springframework.data.domain.Sort;
+  List<UserEntity> findAllByEmailAndPhone(String email, String phone, Sort sort);
 
-  List<User> findAllByEmailOrPhone(String email, String phone, Sort sort);
+  List<UserEntity> findAllByEmailAndPhoneOrderByEmailDesc(String email, String phone);
 
   // 2. JPQL (Shall use JPQL only!)
   // explicit query provided
-  @Query("SELECT e FROM User e WHERE CAST(e.addrLat AS double) > :lat")
-  List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByAddrLatGreaterThan(
-      @Param("lat") Double latitude);
+  @Query("SELECT e FROM UserEntity e WHERE CAST(e.addrLat AS double) > :lat")
+  List<UserEntity> findAllByAddrLatGreaterThan(@Param("lat") Double latitude);
+
+  
+  // PATCH
+  // JPQL (patch)
+  // @Modifying + Query
+  @Modifying
+  @Query("UPDATE UserEntity u SET u.email = :newEmail WHERE u.id = :userId")
+  void updateUserEmail(@Param("userId") long id, @Param("newEmail") String email);
+
 
   // 3. Native Query (SQL product dependent)
   @Query(value = "SELECT count(1) FROM USERS u WHERE lower(u.name) LIKE lower(concat(:prefix,'%'))", nativeQuery = true)
   Long countUserByNameStartsWith(@Param("prefix") String prefix);
 
-  // PATCH
-  // JPQL (patch)
-  // @Modifying + Query
-  @Modifying
-  @Query("UPDATE User u SET u.email = :newEmail WHERE u.id = :userId")
-  void updateUserEmail(@Param("userId") long id, @Param("newEmail") String email);
 
 
 }
-
-
 
 // CRUD methods enforced by JpaRespository interface:
 //

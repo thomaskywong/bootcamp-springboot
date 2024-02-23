@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.vtxlab.bootcamp.bootcampsbforum.mapper.GovMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.ForumDatabaseService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.GovService;
@@ -18,7 +19,7 @@ public class GovServiceHolder implements GovService {
   private UserService userService;
 
   @Autowired
-  private GovMapper govMapper;
+  private UserMapper govMapper;
 
   @Autowired
   private ForumDatabaseService forumDatabaseService;
@@ -49,7 +50,7 @@ public class GovServiceHolder implements GovService {
     forumDatabaseService.deleteAllUsers();
 
     // save all
-    List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> userEntities =
+    List<UserEntity> userEntities =
         users.stream() //
             .map(e -> govMapper.mapEntity(e)) //
             .collect(Collectors.toList());

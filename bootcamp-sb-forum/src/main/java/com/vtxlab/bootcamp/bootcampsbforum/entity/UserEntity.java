@@ -20,10 +20,11 @@ import lombok.Setter;
 @Table(name = "users")
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+@Builder // Do not use Builder
+// @ToString
+public class UserEntity implements Serializable {
 
   // Serializable. Update UID everytime modify Entity
   // Serializable for Database

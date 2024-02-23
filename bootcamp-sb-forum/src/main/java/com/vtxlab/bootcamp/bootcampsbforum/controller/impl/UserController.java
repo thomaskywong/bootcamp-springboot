@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.bootcampsbforum.controller.UserOperation;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
@@ -29,45 +30,45 @@ public class UserController implements UserOperation {
   }
 
   @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> getUsers2() {
+  public List<UserEntity> getUsers2() {
     // System.out.println("start controller");
     return userService.findAll();
   }
 
-  @Override
-  public com.vtxlab.bootcamp.bootcampsbforum.entity.User getUser2(Long id) {
-    // System.out.println("start controller");
-    return userService.findById(id);
-  }
+  // @Override
+  // public UserEntity getUser2(Long id) {
+  //   // System.out.println("start controller");
+  //   return userService.findById(id);
+  // }
 
 
-  @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByAddr(
-      Double Latitude) {
-    return userService.findAllByAddr(Latitude);
-  }
+  // @Override
+  // public List<UserEntity> findAllByAddr(
+  //     Double Latitude) {
+  //   return userService.findAllByAddr(Latitude);
+  // }
 
-  @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailOrPhone(
-      String email, String phone) {
-    return userService.findAllByEmailOrPhoneDesc(email, phone);
-  }
+  // @Override
+  // public List<UserEntity> findAllByEmailOrPhone(
+  //     String email, String phone) {
+  //   return userService.findAllByEmailOrPhoneDesc(email, phone);
+  // }
 
-  @Override
-  public Long countUserByName(String prefix) {
-    return userService.countUserByName(prefix.toLowerCase());
-  }
+  // @Override
+  // public Long countUserByName(String prefix) {
+  //   return userService.countUserByName(prefix.toLowerCase());
+  // }
 
-  @Override
-  public void patchUserEmailById(long id, String email) {
-    userService.updateUserEmail(id, email);
-  }
+  // @Override
+  // public void patchUserEmailById(long id, String email) {
+  //   userService.updateUserEmail(id, email);
+  // }
 
-  @Override
-  public com.vtxlab.bootcamp.bootcampsbforum.entity.User putUserById(long id,
-      com.vtxlab.bootcamp.bootcampsbforum.entity.User newUser) {
+  // @Override
+  // public UserEntity putUserById(long id,
+  //     UserEntity newUser) {
 
-    return userService.updateUserById(id, newUser);
-  }
+  //   return userService.updateUserById(id, newUser);
+  // }
 
 }

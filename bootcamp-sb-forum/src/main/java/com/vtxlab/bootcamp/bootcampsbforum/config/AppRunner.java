@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import com.vtxlab.bootcamp.bootcampsbforum.mapper.GovMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.ForumDatabaseService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
@@ -42,7 +42,7 @@ public class AppRunner implements CommandLineRunner {
   private UserService userService;
 
   @Autowired
-  private GovMapper govMapper;
+  private UserMapper govMapper;
 
   @Override
   public void run(String... args) throws Exception {
@@ -56,21 +56,12 @@ public class AppRunner implements CommandLineRunner {
 
     forumDatabaseService.deleteAllUsers();
 
-    List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> userEntities =
+    List<UserEntity> userEntities =
         users.stream() //
             .map(e -> govMapper.mapEntity(e)) //
             .collect(Collectors.toList());
 
     forumDatabaseService.saveUsers(userEntities);
-
-
-    // System.out.println("Hello World!");
-
-    // example on checking
-    // int x = 2;
-    // if (x < 3) {
-    // throw new RuntimeException();
-    // }
 
   }
 }

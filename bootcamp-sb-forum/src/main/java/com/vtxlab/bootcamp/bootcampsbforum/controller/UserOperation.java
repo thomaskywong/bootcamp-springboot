@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 
 public interface UserOperation {
@@ -36,36 +37,36 @@ public interface UserOperation {
 
   @GetMapping(value = "/database/users")
   @ResponseStatus(value = HttpStatus.OK)
-  List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> getUsers2();
+  List<UserEntity> getUsers2();
 
-  @GetMapping(value = "/database/user")
-  @ResponseStatus(value = HttpStatus.OK)
-  com.vtxlab.bootcamp.bootcampsbforum.entity.User getUser2(
-      @RequestParam Long id);
+//   @GetMapping(value = "/database/user")
+//   @ResponseStatus(value = HttpStatus.OK)
+//   UserEntity getUser2(
+//       @RequestParam Long id);
 
-  @GetMapping(value = "/users/count")
-  Long countUserByName(@RequestParam(value = "prefix") String prefix);
+//   @GetMapping(value = "/users/count")
+//   Long countUserByName(@RequestParam(value = "prefix") String prefix);
 
-  @GetMapping(value = "/users/addrlat")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByAddr(
-      @RequestParam(value = "lat") Double Latitude);
+//   @GetMapping(value = "/users/addrlat")
+//   @ResponseStatus(value = HttpStatus.OK)
+//   List<UserEntity> findAllByAddr(
+//       @RequestParam(value = "lat") Double Latitude);
 
-  @GetMapping(value = "/users/email/{email}/phone/{phone}")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> findAllByEmailOrPhone(
-      @PathVariable String email, @PathVariable String phone);
+//   @GetMapping(value = "/users/email/{email}/phone/{phone}")
+//   @ResponseStatus(value = HttpStatus.OK)
+//   List<UserEntity> findAllByEmailOrPhone(
+//       @PathVariable String email, @PathVariable String phone);
 
 
-  @PatchMapping(value = "/users/id/{id}/email/{email}")
-  @ResponseStatus(value = HttpStatus.OK)
-  void patchUserEmailById(@PathVariable long id, @PathVariable String email);
+//   @PatchMapping(value = "/users/id/{id}/email/{email}")
+//   @ResponseStatus(value = HttpStatus.OK)
+//   void patchUserEmailById(@PathVariable long id, @PathVariable String email);
 
-  @PutMapping(value = "/users/id/{id}")
-  @ResponseStatus(value = HttpStatus.OK)
-  com.vtxlab.bootcamp.bootcampsbforum.entity.User putUserById(
-      @PathVariable long id,
-      @RequestBody com.vtxlab.bootcamp.bootcampsbforum.entity.User newUser);
+//   @PutMapping(value = "/users/id/{id}")
+//   @ResponseStatus(value = HttpStatus.OK)
+//   UserEntity putUserById(
+//       @PathVariable long id,
+//       @RequestBody UserEntity newUser);
 
 
 }

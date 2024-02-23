@@ -3,7 +3,7 @@ package com.vtxlab.bootcamp.bootcampsbforum.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bootcampsbforum.controller.impl.RedisHelper;
+import com.vtxlab.bootcamp.bootcampsbforum.infra.RedisHelper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.User2;
 import com.vtxlab.bootcamp.bootcampsbforum.service.RedisService;
 

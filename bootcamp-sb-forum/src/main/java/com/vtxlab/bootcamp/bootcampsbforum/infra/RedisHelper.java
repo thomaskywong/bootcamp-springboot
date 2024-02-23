@@ -1,4 +1,4 @@
-package com.vtxlab.bootcamp.bootcampsbforum.controller.impl;
+package com.vtxlab.bootcamp.bootcampsbforum.infra;
 
 import java.util.Objects;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -6,7 +6,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vtxlab.bootcamp.bootcampsbforum.model.User2;
 
 public class RedisHelper {
 

@@ -12,7 +12,7 @@ import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserPostDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.ApiResponse;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
-import com.vtxlab.bootcamp.bootcampsbforum.mapper.GovMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Comment;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
@@ -36,7 +36,7 @@ public class GovController implements GovOperation {
   private CommentService commentService;
 
   @Autowired
-  private GovMapper govMapper;
+  private UserMapper govMapper;
 
   @Autowired 
   private ModelMapper modelMapper;

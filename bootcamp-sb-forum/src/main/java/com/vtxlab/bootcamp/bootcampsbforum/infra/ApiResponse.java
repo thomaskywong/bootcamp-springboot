@@ -1,5 +1,7 @@
 package com.vtxlab.bootcamp.bootcampsbforum.infra;
 
+import lombok.ToString;
+
 // import lombok.Builder;
 // import lombok.Getter;
 
@@ -13,6 +15,8 @@ package com.vtxlab.bootcamp.bootcampsbforum.infra;
 
 // @Getter
 // @Builder
+// public class ApiResponse<T extends Number> {
+@ToString()
 public class ApiResponse<T> {
 
   private String code;
@@ -48,8 +52,13 @@ public class ApiResponse<T> {
     private String code;
 
     private String message;
-  
+
     private U data;
+
+    {
+      this.code = Syscode.OK.getCode();
+      this.message = Syscode.OK.getMessage();
+    }
 
     public ApiResponseBuilder<U> code(String code) {
       this.code = code;
@@ -66,12 +75,61 @@ public class ApiResponse<T> {
       return this;
     }
 
+    public ApiResponseBuilder<U> ok() {
+      this.code = Syscode.OK.getCode();
+      this.message = Syscode.OK.getMessage();
+      return this;
+    }
+
+    public ApiResponseBuilder<U> status(Syscode syscode) {
+      // if (syscode == null) throw xxxException
+      this.code = syscode.getCode();
+      this.message = syscode.getMessage();
+      return this;
+    }
+
     public ApiResponse<U> build() {
+      // Double checking
+      // throw exception if not valid
       return new ApiResponse<U>(this);
     }
+  }
+
+  public static void main(String[] args) {
+    ApiResponse<String> apiResponse = ApiResponse.<String>builder() //
+        .code(Syscode.OK.getCode()) //
+        .message(Syscode.OK.getMessage()) //
+        .data("Hello World") //
+        .build();
+
+    ApiResponse<String> apiResponse2 = ApiResponse.<String>builder() //
+        .ok() //
+        .data("Hello World") //
+        .build();
+
+    ApiResponse<String> apiResponse3 = ApiResponse.<String>builder() //
+        .data("Hello World") //
+        .build();
+
+    ApiResponse<String> apiResponse4 = ApiResponse.<String>builder() //
+        .status(Syscode.OK) //
+        .data("Hello World") //
+        .build();
+
+    ApiResponse<String> apiResponse5 = ApiResponse.<String>builder() //
+        .status(Syscode.NOTFOUND) //
+        .data(null) //
+        .build();
+
+    System.out.println(apiResponse.toString());
+    System.out.println(apiResponse2.toString());
+    System.out.println(apiResponse3.toString());
+    System.out.println(apiResponse4.toString());
+    System.out.println(apiResponse5.toString());
+
 
 
   }
 
-  
+
 }
