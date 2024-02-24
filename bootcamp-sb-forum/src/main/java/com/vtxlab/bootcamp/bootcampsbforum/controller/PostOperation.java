@@ -21,25 +21,25 @@ public interface PostOperation {
   @ResponseStatus(value = HttpStatus.OK)
   UserPostDTO getPost(@RequestParam Long id);
 
-  @PostMapping(value = "/database/post")
-  @ResponseStatus(value = HttpStatus.OK)
-  Post2 updateDBPostById(@RequestParam Long id, @RequestBody Post2 post);
+  // @PostMapping(value = "/database/post")
+  // @ResponseStatus(value = HttpStatus.OK)
+  // Post2 updateDBPostById(@RequestParam Long id, @RequestBody Post2 post);
 
-  @GetMapping(value = "/database/post")
-  @ResponseStatus(value = HttpStatus.OK)
-  UserPostDTO getDBPostById(@RequestParam Long id);
+  // @GetMapping(value = "/database/post")
+  // @ResponseStatus(value = HttpStatus.OK)
+  // UserPostDTO getDBPostById(@RequestParam Long id);
 
-  @GetMapping(value = "/database/postJPQL")
-  @ResponseStatus(value = HttpStatus.OK)
-  UserPostDTO getDBPostByIdJPQL(@RequestParam Long id);
+  // @GetMapping(value = "/database/postJPQL")
+  // @ResponseStatus(value = HttpStatus.OK)
+  // UserPostDTO getDBPostByIdJPQL(@RequestParam Long id);
 
-  @PostMapping(value = "/database/postJPQL")
-  @ResponseStatus(value = HttpStatus.OK)
-  Post2 updateDBPostByIdJPQL(@RequestParam Long id, @RequestBody Post2 post);
+  // @PostMapping(value = "/database/postJPQL")
+  // @ResponseStatus(value = HttpStatus.OK)
+  // Post2 updateDBPostByIdJPQL(@RequestParam Long id, @RequestBody Post2 post);
 
-  @GetMapping(value = "/database/postSQL")
-  @ResponseStatus(value = HttpStatus.OK)
-  List<Post2> getPostByIdSQL(@RequestParam Long id);
+  // @GetMapping(value = "/database/postSQL")
+  // @ResponseStatus(value = HttpStatus.OK)
+  // List<Post2> getPostByIdSQL(@RequestParam Long id);
 
   
 }

@@ -14,25 +14,25 @@ public interface GovOperation {
 
   // 1. no user found
   // 2. user found, not no post
-  @GetMapping(value = "/user")
-  @ResponseStatus(value = HttpStatus.OK) // Use Global Exception Handler to catch exceptions
+  // @GetMapping(value = "/user")
+  // @ResponseStatus(value = HttpStatus.OK) // Use Global Exception Handler to catch exceptions
   ApiResponse<UserPostDTO> getUser(@RequestParam(required = true) Long userId);
 
-  @GetMapping(value = "/users")
-  @ResponseStatus(value = HttpStatus.OK)
+  // @GetMapping(value = "/users")
+  // @ResponseStatus(value = HttpStatus.OK)
   ApiResponse<List<UserPostDTO>> getUsers();
 
-  @GetMapping(value = "/comments")
+  // @GetMapping(value = "/comments")
   UserCommentDTO getUserComments(@RequestParam Long userId);
 
   // 404 -> request path issue orresource not found
   // 204 -> id not found.
 
   // NPE
-  @GetMapping(value = "/test/npe")
+  // @GetMapping(value = "/test/npe")
   public String testNPE();
 
-  @GetMapping(value = "/test/modelmapper")
+  // @GetMapping(value = "/test/modelmapper")
   UserDTO testModelMapper();
 
 }

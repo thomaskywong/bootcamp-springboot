@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.PostDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserPostDTO;
+import com.vtxlab.bootcamp.bootcampsbforum.dto.request.PostRequestDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.entity.PostEntity;
 import com.vtxlab.bootcamp.bootcampsbforum.model.Post2;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
@@ -21,6 +22,12 @@ public class PostMapper {
   public PostDTO postMapper(Post post) {
 
     return modelMapper.map(post, PostDTO.class);
+
+  }
+
+  public PostRequestDTO postMapperToPostRequestDTO(Post post) {
+
+    return modelMapper.map(post, PostRequestDTO.class);
 
   }
 
@@ -49,33 +56,42 @@ public class PostMapper {
   }
 
   public PostEntity mapToEntity(Post post) {
-    return new PostEntity((long) post.getId(), //
-        (long) post.getUserId(), //
+    return new PostEntity(null, //
         post.getTitle(), //
-        post.getBody());
+        post.getBody(),
+        null);
   }
 
-  public PostEntity mapToEntity(Post2 post) {
-    return new PostEntity((long) post.getId(), //
-        (long) post.getUserId(), //
-        post.getTitle(), //
-        post.getBody());
-  }
+  // public PostEntity mapToEntity(Post2 post) {
+  //   return new PostEntity(null, //
+  //       (long) post.getUserId(), //
+  //       post.getTitle(), //
+  //       post.getBody(), 
+  //       null);
+  // }
 
-  public Post mapToPost(PostEntity postEntity) {
-    return Post.builder() //
-               .id((int)(long) postEntity.getId()) //
-               .userId((int)(long) postEntity.getUserId()) //
-               .title(postEntity.getTitle()) //
-               .body(postEntity.getBody())
-               .build();
-  }
+  // public Post mapToPost(PostEntity postEntity) {
+  //   return Post.builder() //
+  //              .id((int)(long) postEntity.getId()) //
+  //              .userId((int)(long) postEntity.getUserId()) //
+  //              .title(postEntity.getTitle()) //
+  //              .body(postEntity.getBody())
+  //              .build();
+  // }
 
-  public Post2 mapToPost2(PostEntity postEntity) {
-    return new Post2(postEntity.getId(), //
-                     postEntity.getUserId(), //
-                     postEntity.getTitle(), //
-                     postEntity.getBody());
-  }
+  // public Post2 mapToPost2(PostEntity postEntity) {
+  //   return new Post2(postEntity.getId(), //
+  //                    postEntity.getUserId(), //
+  //                    postEntity.getTitle(), //
+  //                    postEntity.getBody());
+  // }
+
+  // Mapper for 
+  // public PostEntityPK mapEntity(PostRequestDTO dto) {
+  //   return new PostEntity(null, //
+  //       dto.getTitle(), //
+  //       dto.getBody(), //
+  //       null);
+  // }
 
 }

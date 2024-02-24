@@ -26,7 +26,6 @@ public class User {
   private Company company;  // One-to-one mapping
 
   @Getter
-  // @Setter
   public static class Address {
 
     private String street;
@@ -34,9 +33,9 @@ public class User {
     private String city;
     private String zipcode;
     private Location geo; // One-to-One Mapping
+  
 
     @Getter
-    // @Setter
     public static class Location {
       
       // change attribute name from web to local name
@@ -49,18 +48,17 @@ public class User {
     }
 
   }
+    
+    @Getter
+    public static class Company {
   
-  @Getter
-  // @Setter
-  public static class Company {
-
-    private String name;
-    private String catchPhrase;
-
-    @JsonProperty(value = "bs")
-    private String businessService;
-
-  }
+      private String name;
+      private String catchPhrase;
+  
+      @JsonProperty(value = "bs")
+      private String businessService;
+  
+    }
 
 
 }

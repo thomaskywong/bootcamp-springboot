@@ -37,7 +37,7 @@ public interface UserOperation {
 
   @GetMapping(value = "/database/users")
   @ResponseStatus(value = HttpStatus.OK)
-  List<UserEntity> getUsers2();
+  List<UserEntity> getUserEntities();
 
 //   @GetMapping(value = "/database/user")
 //   @ResponseStatus(value = HttpStatus.OK)

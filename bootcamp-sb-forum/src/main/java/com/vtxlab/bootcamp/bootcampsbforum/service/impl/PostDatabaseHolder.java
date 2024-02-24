@@ -57,75 +57,75 @@ public class PostDatabaseHolder implements PostDatabaseService {
   //   return entityManager.find(PostEntity.class, id);
   // }
 
-  @Override
-  @Transactional // annotation for entityManager 
-  public Post2 updateDBPostById(Long id, Post2 newPost){
+  // @Override
+  // @Transactional // annotation for entityManager 
+  // public Post2 updateDBPostById(Long id, Post2 newPost){
 
-    PostEntity newPostEntity = postMapper.mapToEntity(newPost);
-    System.out.println("new post=" + newPostEntity);
+  //   PostEntity newPostEntity = postMapper.mapToEntity(newPost);
+  //   System.out.println("new post=" + newPostEntity);
 
-    PostEntity postEntity = entityManager.find(PostEntity.class, id);
-    System.out.println("post from DB=" +postEntity);
+  //   PostEntity postEntity = entityManager.find(PostEntity.class, id);
+  //   System.out.println("post from DB=" +postEntity);
 
 
-    postEntity.setUserId(newPostEntity.getUserId()); 
-    postEntity.setTitle(newPostEntity.getTitle()); 
-    postEntity.setBody(newPostEntity.getBody());
+  //   postEntity.setUserId(newPostEntity.getUserId()); 
+  //   postEntity.setTitle(newPostEntity.getTitle()); 
+  //   postEntity.setBody(newPostEntity.getBody());
 
-    System.out.println("updated post=" +postEntity);
+  //   System.out.println("updated post=" +postEntity);
 
-    entityManager.merge(postEntity);
+  //   entityManager.merge(postEntity);
 
-    PostEntity updatedPostEntity = entityManager.find(PostEntity.class, id);
+  //   PostEntity updatedPostEntity = entityManager.find(PostEntity.class, id);
 
-    Post2 updatedPost = postMapper.mapToPost2(updatedPostEntity);
+  //   Post2 updatedPost = postMapper.mapToPost2(updatedPostEntity);
 
-    return updatedPost;
-    // return newPost;
-  }
+  //   return updatedPost;
+  //   // return newPost;
+  // }
 
-  @Override
-  public List<Post> getDBPostsById(Long id) {
+  // @Override
+  // public List<Post> getDBPostsById(Long id) {
     
-    List<PostEntity> postsEntityDB = postRepository.findAllByUserId(id);
+  //   List<PostEntity> postsEntityDB = postRepository.findAllByUserId(id);
 
-    return postsEntityDB.stream().map(e -> postMapper.mapToPost(e)).collect(Collectors.toList());
+  //   return postsEntityDB.stream().map(e -> postMapper.mapToPost(e)).collect(Collectors.toList());
 
-  }
+  // }
 
-  @Override
-  public List<Post> getDBPostsByIdJPQL(Long id) {
+  // @Override
+  // public List<Post> getDBPostsByIdJPQL(Long id) {
     
-    List<PostEntity> postEntities = postRepository.getDBPostByIdJPQL(id);
+  //   List<PostEntity> postEntities = postRepository.getDBPostByIdJPQL(id);
 
-    List<Post> postList = postEntities.stream() //
-                                      .map( e -> postMapper.mapToPost(e)) //
-                                      .collect(Collectors.toList());
-    return postList;
+  //   List<Post> postList = postEntities.stream() //
+  //                                     .map( e -> postMapper.mapToPost(e)) //
+  //                                     .collect(Collectors.toList());
+  //   return postList;
 
-  }
+  // }
 
-  @Override
-  @Transactional // annotation for entityManager 
-  public Post2 setPostByPostId(Long id, Post2 newPost) {
+  // @Override
+  // @Transactional // annotation for entityManager 
+  // public Post2 setPostByPostId(Long id, Post2 newPost) {
     
-    postRepository.setPostUserIdByPostId(newPost.getUserId(), id);
-    postRepository.setPostTitleByPostId(newPost.getTitle(), id);
-    postRepository.setPostBodyByPostId(newPost.getBody(), id);
+  //   postRepository.setPostUserIdByPostId(newPost.getUserId(), id);
+  //   postRepository.setPostTitleByPostId(newPost.getTitle(), id);
+  //   postRepository.setPostBodyByPostId(newPost.getBody(), id);
 
-    PostEntity postEntity = entityManager.find(PostEntity.class, id);
+  //   PostEntity postEntity = entityManager.find(PostEntity.class, id);
 
-    return postMapper.mapToPost2(postEntity);
-  }
+  //   return postMapper.mapToPost2(postEntity);
+  // }
 
 
-  @Override
-  public List<Post2> getPostByIdSQL(Long id) {
-    List<PostEntity> postEntities = postRepository.getPostByIdSQL(id);
-    return postEntities.stream() //
-                       .map(e -> postMapper.mapToPost2(e)) //
-                       .collect(Collectors.toList());
-  }
+  // @Override
+  // public List<Post2> getPostByIdSQL(Long id) {
+  //   List<PostEntity> postEntities = postRepository.getPostByIdSQL(id);
+  //   return postEntities.stream() //
+  //                      .map(e -> postMapper.mapToPost2(e)) //
+  //                      .collect(Collectors.toList());
+  // }
   
   
 }

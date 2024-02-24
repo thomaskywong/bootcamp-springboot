@@ -79,7 +79,7 @@ public class UserMapper {
 
   // Mapper converts User object to User Entity Object to be stored in Database
   public UserEntity mapEntity(User user) {
-    return new UserEntity(null, //
+    return new UserEntity((long) user.getId(), //
         user.getName(), //
         user.getUsername(), //
         user.getEmail(), //
@@ -93,8 +93,11 @@ public class UserMapper {
         user.getAddress().getGeo().getLongtitude(), //
         user.getCompany().getName(), //
         user.getCompany().getCatchPhrase(), //
-        user.getCompany().getBusinessService());
+        user.getCompany().getBusinessService(), 
+        null);
         
   }
+
+  
 
 }

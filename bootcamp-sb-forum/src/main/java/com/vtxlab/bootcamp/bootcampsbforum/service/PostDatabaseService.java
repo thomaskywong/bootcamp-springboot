@@ -15,15 +15,15 @@ public interface PostDatabaseService {
 
   // PostEntity updateDBPostById(Long id, PostEntity newPostEntity);
 
-  Post2 updateDBPostById(Long id, Post2 newPost);
+  // Post2 updateDBPostById(Long id, Post2 newPost);
 
-  List<Post> getDBPostsById(Long id);
+  // List<Post> getDBPostsById(Long id);
 
-  List<Post> getDBPostsByIdJPQL(Long id);
+  // List<Post> getDBPostsByIdJPQL(Long id);
 
-  Post2 setPostByPostId(Long id, Post2 newPost);
+  // Post2 setPostByPostId(Long id, Post2 newPost);
 
-  List<Post2> getPostByIdSQL(Long id);
+  // List<Post2> getPostByIdSQL(Long id);
 
   
 

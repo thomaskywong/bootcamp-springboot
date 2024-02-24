@@ -13,8 +13,8 @@ import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.CommentService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
-@RestController
-@RequestMapping(value = "/api/v1")
+// @RestController
+// @RequestMapping(value = "/api/v1")
 public class CommentController implements CommentOperation {
 
   @Autowired

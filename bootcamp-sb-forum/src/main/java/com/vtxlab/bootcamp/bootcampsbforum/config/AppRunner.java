@@ -1,16 +1,18 @@
 package com.vtxlab.bootcamp.bootcampsbforum.config;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
-import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.RequestDTOMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
-import com.vtxlab.bootcamp.bootcampsbforum.service.ForumDatabaseService;
+import com.vtxlab.bootcamp.bootcampsbforum.repository.UserRepository;
+import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
 // implicitly
@@ -29,39 +31,67 @@ import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 @Component
 public class AppRunner implements CommandLineRunner {
 
-  @Value(value = "${api.jph.domain}")
-  private String domain;
+  // @Value(value = "${api.jph.domain}")
+  // private String domain;
 
-  @Value(value = "${api.jph.endpoints.user}")
-  private String userEndpoint;
+  // @Value(value = "${api.jph.endpoints.user}")
+  // private String userEndpoint;
 
-  @Autowired
-  private ForumDatabaseService forumDatabaseService;
+  // @Autowired
+  // private ForumDatabaseService forumDatabaseService;
 
   @Autowired
   private UserService userService;
 
   @Autowired
-  private UserMapper govMapper;
+  private PostService postService;
+
+  @Autowired
+  private RequestDTOMapper requestDTOMapper;
+
+  @Autowired
+  private UserRepository userRepository;
+
+  // @Autowired
+  // private UserMapper govMapper;
 
   @Override
   public void run(String... args) throws Exception {
 
+
+    // Extract data from JPH
+    List<User> users = userService.getUsers();
+    List<Post> posts = postService.getPosts();
+
+    // Prepare Data for Serializable
+    List<UserEntity> userEntities = new ArrayList<>();
+
+    for (User user : users) {
+
+      // Prepare UserEntity
+      UserEntity userEntity = requestDTOMapper.mapToUserEntity(user, posts);
+
+      userEntities.add(userEntity);
+
+    }
+
+    userRepository.saveAll(userEntities);
+    System.out.println("Update Time:" + LocalDateTime.now());
     // Call JPH -> User and Posts -> put it to database
     // could not call JPH -> RestClientException -> throw exception
 
-    List<User> users = userService.getUsers();
+    // List<User> users = userService.getUsers();
 
-    Objects.requireNonNull(users);
+    // Objects.requireNonNull(users);
 
-    forumDatabaseService.deleteAllUsers();
+    // forumDatabaseService.deleteAllUsers();
 
-    List<UserEntity> userEntities =
-        users.stream() //
-            .map(e -> govMapper.mapEntity(e)) //
-            .collect(Collectors.toList());
+    // List<UserEntity> userEntities =
+    // users.stream() //
+    // .map(e -> govMapper.mapEntity(e)) //
+    // .collect(Collectors.toList());
 
-    forumDatabaseService.saveUsers(userEntities);
+    // forumDatabaseService.saveUsers(userEntities);
 
   }
 }

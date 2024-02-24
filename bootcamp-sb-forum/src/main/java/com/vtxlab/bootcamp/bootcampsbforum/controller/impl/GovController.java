@@ -20,8 +20,8 @@ import com.vtxlab.bootcamp.bootcampsbforum.service.CommentService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.GovService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 
-@RestController
-@RequestMapping(value = "/gov/api/v1")
+// @RestController
+// @RequestMapping(value = "/gov/api/v1")
 public class GovController implements GovOperation {
 
   @Autowired

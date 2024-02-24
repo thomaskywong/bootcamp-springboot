@@ -2,12 +2,13 @@ package com.vtxlab.bootcamp.bootcampsbforum.controller.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.bootcampsbforum.controller.UserOperation;
 import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
+import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
+import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
 @RestController
@@ -17,6 +18,9 @@ public class UserController implements UserOperation {
   // Dependency injection (@Service)
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private PostService postService;
 
   @Override 
   public User getUser(Long id) {
@@ -30,9 +34,11 @@ public class UserController implements UserOperation {
   }
 
   @Override
-  public List<UserEntity> getUsers2() {
+  public List<UserEntity> getUserEntities() {
     // System.out.println("start controller");
-    return userService.findAll();
+
+    List<Post> posts = postService.getPosts();
+    return userService.findAll(posts);
   }
 
   // @Override

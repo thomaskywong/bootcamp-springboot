@@ -12,10 +12,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Post {
 
-   @JsonProperty(value = "user_id")
+  @JsonProperty(value = "user_id")
   private int userId;
   private int id;
   private String title;
   private String body;
-  
+
 }

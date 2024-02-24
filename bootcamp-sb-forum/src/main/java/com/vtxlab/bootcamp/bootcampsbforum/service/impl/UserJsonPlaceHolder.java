@@ -1,5 +1,6 @@
 package com.vtxlab.bootcamp.bootcampsbforum.service.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -7,7 +8,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -15,12 +15,14 @@ import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
 import com.vtxlab.bootcamp.bootcampsbforum.exception.ResourceNotFound;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.RequestDTOMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.repository.UserRepository;
+import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 
 @Service
 public class UserJsonPlaceHolder implements UserService {
@@ -38,6 +40,9 @@ public class UserJsonPlaceHolder implements UserService {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private RequestDTOMapper requestDtoMapper;
 
   // for putting object into Database
   // Similar to Autowired. EntityManager from context container
@@ -118,7 +123,25 @@ public class UserJsonPlaceHolder implements UserService {
   // }
 
   @Override
-  public List<UserEntity> findAll() {
+  public List<UserEntity> findAll(List<Post> posts) {
+
+    // Extract data from JPH
+    List<User> users = this.getUsers();
+    
+    // Prepare Data for Serializable
+    List<UserEntity> userEntities = new ArrayList<>();
+    
+    for (User user : users ) {
+
+      // Prepare UserEntity
+      UserEntity userEntity = requestDtoMapper.mapToUserEntity(user, posts);
+
+      userEntities.add(userEntity);
+      
+    }
+
+    userRepository.saveAll(userEntities);
+
     return userRepository.findAll();
   }
 

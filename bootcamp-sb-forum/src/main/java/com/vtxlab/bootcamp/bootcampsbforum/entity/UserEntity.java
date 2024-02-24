@@ -1,11 +1,16 @@
 package com.vtxlab.bootcamp.bootcampsbforum.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +27,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder // Do not use Builder
-// @ToString
+// @Builder // Do not use Builder for DB deserialization
+// @ToString // Do not use ToString
 public class UserEntity implements Serializable {
 
   // Serializable. Update UID everytime modify Entity
@@ -44,14 +49,11 @@ public class UserEntity implements Serializable {
 
   private String email;
 
-  // private Address address; // One-to-One mapping
-
   private String phone;
 
   private String website;
 
-  // private Company company; // One-to-one mapping
-
+  // private Address address; // One-to-One mapping
   private String street;
 
   private String suite;
@@ -69,6 +71,7 @@ public class UserEntity implements Serializable {
   @Column(name = "ADDRESS_LONG")
   private String addrLong;
 
+  // private Company company; // One-to-one mapping
   @Column(name = "COMPANY_NAME")
   private String cName;
 
@@ -77,5 +80,12 @@ public class UserEntity implements Serializable {
 
   @Column(name = "COMPANY_BUSINESS_SERVICE")
   private String cBusService;
+
+  // one-to-many
+  // cascade: when parent is add/delete/update, child will be added/delete/update
+  // orphanRemoval = true: remove child elements that is not related
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true) // serialization
+  @JsonManagedReference // prevent infinite loop
+  private List<PostEntity> posts = new ArrayList<>(); // references points to the whole post list related to user
 
 }
