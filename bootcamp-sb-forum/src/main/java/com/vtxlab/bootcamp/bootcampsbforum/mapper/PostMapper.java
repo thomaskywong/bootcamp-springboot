@@ -62,6 +62,16 @@ public class PostMapper {
         null);
   }
 
+  public Post mapToPost(PostEntity postEntity) {
+    return Post.builder() //
+              .id((int) (long) postEntity.getId()) //
+              .title(postEntity.getTitle()) //
+              .body(postEntity.getBody()) //
+              .userId((int)(long)postEntity.getUser().getId()) //
+              .build();
+              
+  }
+
   // public PostEntity mapToEntity(Post2 post) {
   //   return new PostEntity(null, //
   //       (long) post.getUserId(), //

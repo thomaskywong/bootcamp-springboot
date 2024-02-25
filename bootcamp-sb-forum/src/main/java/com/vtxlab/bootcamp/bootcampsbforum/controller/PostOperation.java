@@ -21,6 +21,11 @@ public interface PostOperation {
   @ResponseStatus(value = HttpStatus.OK)
   UserPostDTO getPost(@RequestParam Long id);
 
+  @GetMapping(value = "/database/posts")
+  @ResponseStatus(value = HttpStatus.OK)
+  List<Post> getPostsFromDB();
+  
+
   // @PostMapping(value = "/database/post")
   // @ResponseStatus(value = HttpStatus.OK)
   // Post2 updateDBPostById(@RequestParam Long id, @RequestBody Post2 post);

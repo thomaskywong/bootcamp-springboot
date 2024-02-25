@@ -10,4 +10,6 @@ public interface PostService {
 
   UserPostDTO getPost(Long id);
 
+  List<Post> getPostsFromDB();
+
 }

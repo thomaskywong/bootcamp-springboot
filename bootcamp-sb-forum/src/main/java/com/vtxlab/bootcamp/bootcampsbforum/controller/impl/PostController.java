@@ -35,6 +35,11 @@ public class PostController implements PostOperation {
     return postService.getPost(id);
   }
 
+  @Override
+  public List<Post> getPostsFromDB() {
+    System.out.println("PostController.....");
+    return postService.getPostsFromDB();
+  }
   // @Override
   // public Post2 updateDBPostById(Long id, Post2 post) {
 

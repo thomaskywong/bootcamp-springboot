@@ -41,7 +41,9 @@ public class PostDatabaseHolder implements PostDatabaseService {
 
   @Override
   public List<PostEntity> findAll() {
-    return postRepository.findAll();
+    List<PostEntity> posts = postRepository.findAll();
+    // System.out.println(posts);
+    return posts;
   }
 
   // @Override

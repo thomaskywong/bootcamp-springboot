@@ -10,11 +10,14 @@ import org.springframework.web.client.RestTemplate;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserPostDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.BcUtil;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.PostMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
+import com.vtxlab.bootcamp.bootcampsbforum.service.PostDatabaseService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.PostEntity;
 
 @Service
 public class PostJsonPlaceHolder implements PostService {
@@ -34,8 +37,20 @@ public class PostJsonPlaceHolder implements PostService {
   @Autowired
   private UserMapper userMapper;
 
+  @Autowired
+  private PostMapper postMapper;
+
+  @Autowired
+  private PostDatabaseService postDatabaseService;
   // @PersistenceContext
   // private EntityManager entityManager;
+
+  @Override
+  public List<Post> getPostsFromDB() {
+    System.out.println("PostJsonPlaceHolder.");
+    List<PostEntity> postEntites = postDatabaseService.findAll();
+    return postEntites.stream().map(e -> postMapper.mapToPost(e)).collect(Collectors.toList());
+  }
 
   @Override
   public List<Post> getPosts() {
