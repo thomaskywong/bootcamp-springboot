@@ -26,7 +26,7 @@ public class GovServiceHolder implements GovService {
 
 
   @Override
-  public User getUser(Long id) {
+  public User getUser(Integer id) {
     User user = userService.getUser(id);
 
     if (user != null) {

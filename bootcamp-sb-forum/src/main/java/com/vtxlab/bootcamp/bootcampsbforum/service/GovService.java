@@ -20,7 +20,7 @@ public interface GovService {
    */
 
   // User is DTO from JPH
-  User getUser(Long id);
+  User getUser(Integer id);
 
   List<User> getUsers();
 

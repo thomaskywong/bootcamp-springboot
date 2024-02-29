@@ -19,7 +19,7 @@ public interface PostOperation {
 
   @GetMapping(value = "/post")
   @ResponseStatus(value = HttpStatus.OK)
-  UserPostDTO getPost(@RequestParam Long id);
+  UserPostDTO getPost(@RequestParam Integer id);
 
   @GetMapping(value = "/database/posts")
   @ResponseStatus(value = HttpStatus.OK)

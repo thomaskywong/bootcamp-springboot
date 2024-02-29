@@ -8,7 +8,7 @@ public interface PostService {
 
   List<Post> getPosts();
 
-  UserPostDTO getPost(Long id);
+  UserPostDTO getPost(Integer id);
 
   List<Post> getPostsFromDB();
 

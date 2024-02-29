@@ -50,7 +50,7 @@ public class UserJsonPlaceHolder implements UserService {
   private EntityManager entityManager;
 
   @Override
-  public User getUser(Long id) {
+  public User getUser(Integer id) {
     String userUrl = url(Scheme.HTTP, domain, userEndpoint);
     User[] users = restTemplate.getForObject(userUrl, User[].class);
     

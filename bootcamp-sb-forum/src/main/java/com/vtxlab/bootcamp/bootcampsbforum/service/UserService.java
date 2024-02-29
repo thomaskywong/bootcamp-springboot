@@ -9,7 +9,7 @@ public interface UserService {
 
   List<User> getUsers();
 
-  User getUser(Long id);
+  User getUser(Integer id);
 
 //   Long countUserByName(String prefix);
 

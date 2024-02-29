@@ -10,8 +10,8 @@ public class BootcampSbForumApplication {
 	
 	public static void main(String[] args) {
 
-		ConfigurableApplicationContext cac
-			= SpringApplication.run(BootcampSbForumApplication.class, args);
+		// ConfigurableApplicationContext cac =
+			SpringApplication.run(BootcampSbForumApplication.class, args);
 
 		// String[] beans = cac.getBeanDefinitionNames();
 

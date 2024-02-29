@@ -6,10 +6,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.vtxlab.bootcamp.bootcampsbforum.controller.Gov2Operation;
 import com.vtxlab.bootcamp.bootcampsbforum.controller.GovOperation;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserCommentDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.gov.UserPostDTO;
+import com.vtxlab.bootcamp.bootcampsbforum.dto.request.UserIdRQDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.ApiResp;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
@@ -21,8 +23,8 @@ import com.vtxlab.bootcamp.bootcampsbforum.service.GovService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 
 @RestController
-@RequestMapping(value = "/gov/api/v1")
-public class GovController implements GovOperation {
+@RequestMapping(value = "/gov2/api/v1")
+public class Gov2Controller implements Gov2Operation {
 
   @Autowired
   private PostService postService;
@@ -41,7 +43,10 @@ public class GovController implements GovOperation {
   @Autowired 
   private ModelMapper modelMapper;
 
-  public ApiResp<UserPostDTO> getUser(Integer userId) {
+  @Override
+  public ApiResp<UserPostDTO> getUser(UserIdRQDTO userdto) {
+    
+    System.out.println("id=" + userdto.getId());
 
     // 1. User service
     // 2. Post service
@@ -51,7 +56,9 @@ public class GovController implements GovOperation {
 
     // Use GovService instead
     //User user = userService.getUser(userId); // Not Found exception done by Service class and Global Exception Handler
-    User user = govService.getUser(userId);
+    User user = govService.getUser(Integer.valueOf(userdto.getId()));
+
+
 
     UserPostDTO userPostDTO = govMapper.map(user, postService.getPosts());
 
@@ -119,7 +126,6 @@ public class GovController implements GovOperation {
     // return new ModelMapper().map(user, UserDTO.class);
 
   }
-
 
 
 

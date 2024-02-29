@@ -13,8 +13,8 @@ import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.CommentService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
-// @RestController
-// @RequestMapping(value = "/api/v1")
+@RestController
+@RequestMapping(value = "/api/v1")
 public class CommentController implements CommentOperation {
 
   @Autowired
@@ -25,7 +25,7 @@ public class CommentController implements CommentOperation {
 
   // Homework
   @Override
-  public UserCommentDTO getUserComments(Long userId)
+  public UserCommentDTO getUserComments(Integer userId)
       throws ResourceNotFound {
 
     // Step 1: Check if User id value. Store User for filtering list of comments

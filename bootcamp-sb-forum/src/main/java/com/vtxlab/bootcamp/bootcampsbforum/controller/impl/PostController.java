@@ -31,7 +31,7 @@ public class PostController implements PostOperation {
   }
 
   @Override
-  public UserPostDTO getPost(Long id) {
+  public UserPostDTO getPost(Integer id) {
     return postService.getPost(id);
   }
 

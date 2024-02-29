@@ -85,7 +85,7 @@ public class PostJsonPlaceHolder implements PostService {
   }
 
   @Override
-  public UserPostDTO getPost(Long id) {
+  public UserPostDTO getPost(Integer id) {
 
     User user = userService.getUser(id);
 

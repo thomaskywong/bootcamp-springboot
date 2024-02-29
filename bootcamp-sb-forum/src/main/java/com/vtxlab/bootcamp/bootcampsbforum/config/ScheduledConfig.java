@@ -34,7 +34,7 @@ public class ScheduledConfig {
 
 
   // @Scheduled(cron = "*/5 * * * * ?") // cron at every xx:xx:05 second from 0 second
-  @Scheduled(cron = "0 * * * * ?") //  cron at every xx:xx:00 second from 0 second
+  // @Scheduled(cron = "0 * * * * ?") //  cron at every xx:xx:00 second from 0 second
   // @Async
   // @Scheduled(fixedRate = 5000)
   public void cronUserEntitiesToDB() throws InterruptedException {
