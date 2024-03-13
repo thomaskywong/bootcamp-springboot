@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.vtxlab.bootcamp.bootcampsbthymeleaf.model.CoinData;
 import com.vtxlab.bootcamp.bootcampsbthymeleaf.service.ApiService;
 
-
 @Controller
 @RequestMapping(value = "/api/v1")
 public class HelloworldController {
@@ -18,21 +17,18 @@ public class HelloworldController {
   private ApiService<CoinData> apiService;
 
   @GetMapping(value = "/hello")
-  public String displayHelloPage(Model model) { // passed by reference
+  public String displayHelloPage(Model model) { // pass-by-reference
     // define variable for html use
-    model.addAttribute("greetingMessage", "Hello World! ..."); // define valiable
-    model.addAttribute("greetingMessage", "ABCDEFG");
+    model.addAttribute("greetingMessage", "Hello World! ...");
+    model.addAttribute("greetingMessage2", "ABCDEFG");
     return "hello-world"; // hello-world.html
   }
 
   @GetMapping(value = "/coindata")
-  public String displayCoinData(Model model) { // passed by reference
-    // define variable for html use
+  public String displayCoinData(Model model) {
     List<CoinData> coinDataList = apiService.fetchData();
     model.addAttribute("coinDataList", coinDataList);
-    return "coin-data"; 
+    return "coin-data"; // coin-data.html
   }
 
-  
-  
 }

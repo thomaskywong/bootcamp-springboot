@@ -10,8 +10,7 @@ public class CoinData {
 
   private String id;
   private String image;
-
   @JsonProperty(value = "current_price")
   private Double currentPrice;
-  
+
 }

@@ -69,8 +69,8 @@ public class RequestDTOMapper {
   public UserRequestDTO mapToUserRequestDTO(UserEntity entity) {
 
     List<PostRequestDTO> postRequestDTOs = entity.getPosts().stream() //
-                                           .map( e -> this.mapToPostRequestDTO(e)) //
-                                           .collect(Collectors.toList());
+        .map(e -> this.mapToPostRequestDTO(e)) //
+        .collect(Collectors.toList());
 
     return UserRequestDTO.builder() //
         .name(entity.getName()) //
@@ -95,75 +95,74 @@ public class RequestDTOMapper {
   public UserEntity mapToUserEntity(UserPostRequestDTO dto) {
     // Step 1: create UserEntity object with User's value
     UserEntity userEntity = new UserEntity(null, //
-                            dto.getName(), //
-                            dto.getUsername(), //
-                            dto.getEmail(), //
-                            dto.getPhone(), //
-                            dto.getWebsite(), //
-                            dto.getStreet(), //
-                            dto.getSuite(), //
-                            dto.getCity(), //
-                            dto.getZipcode(), //
-                            dto.getAddrLat(), //
-                            dto.getAddrLong(), //
-                            dto.getCompanyName(), //
-                            dto.getCompanyCatchPhrase(), //
-                            dto.getCompanyBusService(), //
-                            null);
-    // Step 2: extract List<PostEntity> from List<PostRequestDTO> of UserPostRequestDTO 
-    // pass userEntity reference into each PostEntity. 
+        dto.getName(), //
+        dto.getUsername(), //
+        dto.getEmail(), //
+        dto.getPhone(), //
+        dto.getWebsite(), //
+        dto.getStreet(), //
+        dto.getSuite(), //
+        dto.getCity(), //
+        dto.getZipcode(), //
+        dto.getAddrLat(), //
+        dto.getAddrLong(), //
+        dto.getCompanyName(), //
+        dto.getCompanyCatchPhrase(), //
+        dto.getCompanyBusService(), //
+        null);
+    // Step 2: extract List<PostEntity> from List<PostRequestDTO> of UserPostRequestDTO
+    // pass userEntity reference into each PostEntity.
     List<PostEntity> postEntities = dto.getPosts().stream() //
-                                     .map( e -> { //
-                                        PostEntity postEntity = this.mapToPostEntity(e); //
-                                        postEntity.setUser(userEntity); //
-                                        return postEntity; //
-                                     }) //
-                                     .collect(Collectors.toList());
-    
+        .map(e -> { //
+          PostEntity postEntity = this.mapToPostEntity(e); //
+          postEntity.setUser(userEntity); //
+          return postEntity; //
+        }) //
+        .collect(Collectors.toList());
+
     // Step 3: assign List<PostEntity> object to UserEntity's List<PostEntity> reference
     userEntity.setPosts(postEntities);
 
     return userEntity;
-                                     
+
   }
 
   // UserPostRequestDTO -> UserEntity
   public UserEntity mapToUserEntity(User user, List<Post> posts) {
     // Step 1: create UserEntity object with User's value
     UserEntity userEntity = new UserEntity(null, //
-                            user.getName(), //
-                            user.getUsername(), //
-                            user.getEmail(), //
-                            user.getPhone(), //
-                            user.getWebsite(), //
-                            user.getAddress().getStreet(), //
-                            user.getAddress().getSuite(), //
-                            user.getAddress().getCity(), //
-                            user.getAddress().getZipcode(), //
-                            user.getAddress().getGeo().getLatitude(), //
-                            user.getAddress().getGeo().getLongtitude(), //
-                            user.getCompany().getName(), //
-                            user.getCompany().getCatchPhrase(), //
-                            user.getCompany().getBusinessService(), //
-                            null);
-    // Step 2: extract List<PostEntity> from List<PostRequestDTO> of UserPostRequestDTO 
-    // pass userEntity reference into each PostEntity. 
+        user.getName(), //
+        user.getUsername(), //
+        user.getEmail(), //
+        user.getPhone(), //
+        user.getWebsite(), //
+        user.getAddress().getStreet(), //
+        user.getAddress().getSuite(), //
+        user.getAddress().getCity(), //
+        user.getAddress().getZipcode(), //
+        user.getAddress().getGeo().getLatitude(), //
+        user.getAddress().getGeo().getLongtitude(), //
+        user.getCompany().getName(), //
+        user.getCompany().getCatchPhrase(), //
+        user.getCompany().getBusinessService(), //
+        null);
+    // Step 2: extract List<PostEntity> from List<PostRequestDTO> of UserPostRequestDTO
+    // pass userEntity reference into each PostEntity.
     List<PostEntity> postEntities = posts.stream() //
-                                     .filter(e -> e.getUserId() == user.getId()) //
-                                     .map( e -> { //
-                                        PostEntity postEntity = postMapper.mapToEntity(e); //
-                                        postEntity.setUser(userEntity); //
-                                        return postEntity; //
-                                     }) //
-                                     .collect(Collectors.toList());
-    
+        .filter(e -> e.getUserId() == user.getId()) //
+        .map(e -> { //
+          PostEntity postEntity = postMapper.mapToEntity(e); //
+          postEntity.setUser(userEntity); //
+          return postEntity; //
+        }) //
+        .collect(Collectors.toList());
+
     // Step 3: assign List<PostEntity> object to UserEntity's List<PostEntity> reference
     userEntity.setPosts(postEntities);
 
     return userEntity;
-                                     
-  }
 
+  }
 
 
 

@@ -1,10 +1,10 @@
-package com.vtxlab.bootcamp.practisespringobjectmapper;
+package com.vtxlab.bootcamp.demospringbootemployee;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PractiseSpringObjectmapperApplicationTests {
+class DemoSpringbootEmployeeApplicationTests {
 
 	@Test
 	void contextLoads() {
