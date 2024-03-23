@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="ISO-8599-1">
+      <title>Cryptocurrency</title>
+
+  </head>
+
+  <body>
+      <h1>Crypto-Currency</h1>
+      <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Current Price</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="coin : ${coins}">
+                  <td th:text="${coin.name}"></td>
+                  <td th:text="${coin.curPrice}"></td>
+              </tr>
+          </tbody>
+      </table>
+  </body>
+
+  <script>
+    setInterval(function() {
+        location.reload();
+    }, 1000); // Refresh every 1 second (1000 milliseconds)
+  </script>
+
+</html>

@@ -1,13 +1,13 @@
-package com.thomas.practise.practisespringhiberate;
+package com.vtxlab.bootcamp.practisesbthymeleaf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PractiseSpringHiberateApplication {
+public class PractiseSbThymeleafApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PractiseSpringHiberateApplication.class, args);
+		SpringApplication.run(PractiseSbThymeleafApplication.class, args);
 	}
 
 }

@@ -1,10 +1,10 @@
-package com.thomas.practise.practisespringhiberate;
+package com.vtxlab.bootcamp.practisesbthymeleaf;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PractiseSpringHiberateApplicationTests {
+class PractiseSbThymeleafApplicationTests {
 
 	@Test
 	void contextLoads() {
